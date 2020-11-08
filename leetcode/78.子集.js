@@ -14,7 +14,6 @@ var subsets = function(nums) {
     let temp = [];
     let n = nums.length;
     function dfs(temp, start) {
-        console.log(temp);
         res.push(temp);
         for (let i = start; i < n; i++) {
             temp.push(nums[i]);

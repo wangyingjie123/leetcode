@@ -12,25 +12,27 @@ const { read } = require("fs");
  * @param {number[]} nums2
  * @return {number[]}
  */
+// var intersect = function(nums1, nums2) {
+//     双指针
+//     let p1 = 0;
+//     let p2 = 0;
+//     let res = [];
+//     nums1 = nums1.sort((a, b) => a - b);
+//     nums2 = nums2.sort((a, b) => a - b);
+//     while(p1 < nums1.length && p2 < nums2.length) {
+//         if (nums1[p1] === nums2[p2]) {
+//             res.push(nums1[p1]);
+//             p1++;
+//             p2++
+//         } else if (nums1[p1] < nums2[p2]) {
+//             p1++
+//         } else {
+//             p2++
+//         }
+//     }
+//     return res;
+// };
 var intersect = function(nums1, nums2) {
-    // 双指针
-    // let p1 = 0;
-    // let p2 = 0;
-    // let res = [];
-    // nums1 = nums1.sort((a, b) => a - b);
-    // nums2 = nums2.sort((a, b) => a - b);
-    // while(p1 < nums1.length && p2 < nums2.length) {
-    //     if (nums1[p1] === nums2[p2]) {
-    //         res.push(nums1[p1]);
-    //         p1++;
-    //         p2++
-    //     } else if (nums1[p1] < nums2[p2]) {
-    //         p1++
-    //     } else {
-    //         p2++
-    //     }
-    // }
-    // return res;
     // 删除数组
     let res = [];
     for (let i = nums1.length - 1; i >= 0; i--) {

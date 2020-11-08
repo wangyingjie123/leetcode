@@ -31,8 +31,7 @@ function cal(nums, first, res) {
     }
 }
 var swap = function(nums, i, j) {
-    if (i === j)
-        return;
+    if (i === j) return;
     const t = nums[i];
     nums[i] = nums[j];
     nums[j] = t;

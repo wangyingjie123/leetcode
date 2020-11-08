@@ -11,26 +11,32 @@
  */
 // 二分查找维护数组
 var lengthOfLIS = function(nums) {
-    let tails = [];
-    nums.forEach((num) => {
-        // 二分搜索：找到大于等于 num 的左侧边界，如果全小，则 left = tails.length
-        let left = 0, right = tails.length - 1, mid;
-        while(left <= right) {
-            mid = left + parseInt((right - left) / 2);
-            if (tails[mid] < num) {
-                left = mid + 1;
-            } else if (tails[mid] > num) {
-                right = mid - 1;
-            } else if (tails[mid] === num) {
-                // 收缩右侧边界
-                right = mid - 1;
+    let len = nums.length;
+    if (len < 2) return len;
+    // 记录上升子序列数量
+    let max = 0;
+    let tails = [nums[0]];
+    for (let i = 1; i < len; i++) {
+        if (nums[i] > tails[max]) {
+            tails.push(nums[i]);
+            max++;
+        } else {
+            // 启动二分查找
+            let left = 0, right = max;
+            while(left < right) {
+                let mid = (left + right) >> 1;
+                if (tails[mid] < nums[i]) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
             }
+            tails[left] = nums[i];  
         }
-        tails[left] = num;
-    });
-    // 调试
-    // console.log(tails)
-    return tails.length;
+    }
+    return ++max;
 };
+let res = lengthOfLIS([10,9,2,5,3,4]);
+console.log(res);
 // @lc code=end
 
