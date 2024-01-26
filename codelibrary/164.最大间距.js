@@ -11,34 +11,41 @@
  * @return {number}
  */
 var maximumGap = function (nums) {
-  if (nums.length < 2) {
+  const n = nums.length;
+  if (n < 2) {
     return 0;
   }
-  const len = nums.length;
-  let max = Math.max(...nums);
-  let min = Math.min(...nums);
-  // 每个桶的容量-最多放几个元素
-  const bucketSize = Math.max(1, Math.floor((max - min) / (len - 1)));
-  // 桶的个数
-  const bucketNums = Math.floor((max - min) / bucketSize) + 1;
+  let maxVal = Math.max(...nums);
+  let minVal = Math.min(...nums);
+  const d = Math.max(1, Math.floor(maxVal - minVal) / (n - 1));
+  const bucketSize = Math.floor((maxVal - minVal) / d) + 1;
 
-  const buckets = Array.from({ length: bucketNums }, () => []);
-  // 分桶
-  for (const num of nums) {
-    const i = Math.floor((num - min) / bucketSize);
-    buckets[i].push(num);
+  const bucket = new Array(bucketSize).fill(0).map((x) => new Array(2).fill(0));
+  for (let i = 0; i < bucketSize; ++i) {
+    bucket[i].fill(-1);
   }
-  let res = 0;
-  let prevMax = max;
-  for (const nums of buckets) {
-    if (nums.length === 0) {
+  for (let i = 0; i < n; i++) {
+    const idx = Math.floor((nums[i] - minVal) / d);
+    if (bucket[idx][0] === -1) {
+      bucket[idx][0] = bucket[idx][1] = nums[i];
+    } else {
+      bucket[idx][0] = Math.min(bucket[idx][0], nums[i]);
+      bucket[idx][1] = Math.max(bucket[idx][1], nums[i]);
+    }
+  }
+
+  let ret = 0;
+  let prev = -1;
+  for (let i = 0; i < bucketSize; i++) {
+    if (bucket[i][0] == -1) {
       continue;
     }
-    max = Math.max(...nums); // 1,3,6,9
-    res = Math.max(res, max - prevMax); // 0,2,3,3
-    prevMax = max; // 1,3,6,9
+    if (prev != -1) {
+      ret = Math.max(ret, bucket[i][0] - bucket[prev][1]);
+    }
+    prev = i;
   }
-  return res;
+  return ret;
 };
 maximumGap([3, 6, 9, 1]);
 // @lc code=end
