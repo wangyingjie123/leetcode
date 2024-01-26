@@ -11,11 +11,7 @@
  * @return {boolean}
  */
 var canFinish = function(numCourses, prerequisites) {
-    const inDegree = new Array(numCourses).fill(0); // 入度数组
-    const map = {};                                 // 邻接表
-    for (let i = 0; i < prerequisites.length; i++) {
-        
-    }
+
 };
 // @lc code=end
 
