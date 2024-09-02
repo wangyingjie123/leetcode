@@ -23,7 +23,8 @@ var isPalindrome = function (x) {
     abs = Math.floor(abs / 10);
     res = res * 10 + digit;
   }
+  console.log(res);
   return x === res;
 };
-console.log(isPalindrome(121));
+isPalindrome(1213);
 // @lc code=end
