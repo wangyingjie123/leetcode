@@ -27,18 +27,25 @@
 //     return res;
 // };
 // 方法二，双指针
-var trap = function(height) {
-    let left = 0, right = height.length - 1, leftMax = 0, rightMax = 0, total = 0;
-    while(left <= right) {
-        if (height[left] < height[right]) {
-            height[left] < leftMax ? total += leftMax - height[left] : leftMax = height[left];
-            left++;
-        } else {
-            height[right] < rightMax ? total += rightMax - height[right] : rightMax = height[right];
-            right--;
-        }
+var trap = function (height) {
+  let left = 0,
+    right = height.length - 1,
+    leftMax = 0,
+    rightMax = 0,
+    total = 0;
+  while (left <= right) {
+    if (height[left] < height[right]) {
+      height[left] < leftMax
+        ? (total += leftMax - height[left])
+        : (leftMax = height[left]);
+      left++;
+    } else {
+      height[right] < rightMax
+        ? (total += rightMax - height[right])
+        : (rightMax = height[right]);
+      right--;
     }
-    return total;
-}
+  }
+  return total;
+};
 // @lc code=end
-
